@@ -58,7 +58,7 @@ class Processer:
 
     def _prepare_article_db(self, article, prediction):
         if 'description' not in article:
-            article.description = 'No description was provided'
+            article['description'] = 'No description was provided'
 
         return Article(title = article.title,
                     description = self._shorten_desc(self._clean_html(article.description), 256),
