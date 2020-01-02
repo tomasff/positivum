@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Positivum | {{ title }}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.4.1/litera/bootstrap.min.css" />
+		<style>
+			.card {
+				margin-bottom: 1rem;
+			}
+
+			#title {
+				margin-top: 1rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h2 id="title">Positivum: {{ title }}</h2>
+			<h6>
+				<a href="{{ url_for('page', num_page=1, cls=1) }}"><span class="badge badge-pill badge-success">Positive or Neutral 😊</span></a>
+				<a href="{{ url_for('page', num_page=1, cls=0) }}"><span class="badge badge-pill badge-danger">Negative 😫</span></a>
+			</h6>
+			<hr>
+			<div id="articles">
+				{% for article in articles.items %}
+				<div class="card">
+					<div class="card-body">
+						<h6 class="card-title">{{ article.title }}</h6>
+						<h6 class="card-subtitle mb-2 text-muted">
+							<a href="{{ url_for('page', num_page=1, cls=article.classification) }}">
+								<span class="badge badge-pill badge-{{'success' if (article.classification == 1) else 'danger'}}">{{ 'Positive or Neutral 😊' if (article.classification == 1) else 'Negative 😫' }}</span>
+							</a>
+						</h6>
+						<p class="card-text">{{ article.description }}</p>
+						<a href="{{ article.url }}" class="card-link">Source</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<nav aria-label="Articles pages navigation">
+				<ul class="pagination justify-content-center">
+					<li class="page-item {{ 'disabled' if not articles.has_prev }}">
+						<a class="page-link" href="{{ url_for('page', num_page=articles.prev_num, cls=cls) if articles.has_prev }}">Previous</a>
+					</li>
+					{% for num in range(articles.pages) %}
+					<li class="page-item {{'active' if (articles.page == num + 1) or (not articles.page)}}">
+						<a class="page-link" href="{{ url_for('page', num_page=(num+1), cls=cls) }}">{{num + 1}}</a>
+					</li>
+					{% endfor %}
+					<li class="page-item {{ 'disabled' if not articles.has_next }}">
+						<a class="page-link" href="{{ url_for('page', num_page=articles.next_num, cls=cls) if articles.has_next }}">Next</a>
+					</li>
+				</ul>
+			</nav>
+                        <hr>
+                        <p class="float-right text-muted">Made by <a href="https://github.com/tomasff">Tomás Fernandes</a></p>
+		</div>
+	</body>
+</html>

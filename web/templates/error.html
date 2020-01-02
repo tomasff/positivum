@@ -1,0 +1,23 @@
+<html>
+
+	<head>
+            <title>Error - {{ error }}</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.4.1/litera/bootstrap.min.css" />
+		<style>
+		.card {
+			margin-bottom: 1rem;
+		}
+		#title {
+			margin-top: 1rem;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+                    <h1 id="title">Error - {{ error_code }}</h1>
+	            <hr>
+                    <p>Uh oh, {{ error }} 😫</p>
+                    <p><a href="/">Go back to the home page</a></p>
+                </div>
+	</body>
+</html>
