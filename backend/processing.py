@@ -8,15 +8,7 @@ import numpy as np
 
 import re
 
-from enum import IntEnum
-
 from database import Article, Source
-
-tf.config.set_soft_device_placement(True)
-
-class Classification(IntEnum):
-    NEGATIVE = 0
-    POSITIVE_NEUTRAL = 1
 
 class Processer:
 
@@ -56,6 +48,9 @@ class Processer:
 
         return predictions
 
+    def _article_has_attribs(self, article):
+        return all(attrib in article.keys() for attrib in ['title', 'link', 'published_parsed'])
+
     def _prepare_article_db(self, article, prediction):
         if 'description' not in article:
             article['description'] = 'No description was provided'
@@ -75,13 +70,16 @@ class Processer:
                 feed = feedparser.parse(source.feed_url)
                 articles = feed.entries
 
-                new_articles = [article for article in articles if not sess.query(Article).filter_by(url=article.link).first()]
+                new_articles = [article for article in articles 
+                        if not sess.query(Article).filter_by(url=article.link).first() and
+                        self._article_has_attribs(article)]
 
                 if len(new_articles) == 0:
                     continue
 
                 predictions = self._analyze(new_articles)                
-                classified_articles = [self._prepare_article_db(article, prediction) for article, prediction in zip(new_articles, predictions)]
+                classified_articles = [self._prepare_article_db(article, prediction) 
+                            for article, prediction in zip(new_articles, predictions)]
                 
                 source.articles.extend(classified_articles)
 
