@@ -9,7 +9,7 @@ The web application written in flask then displays the articles in the database 
 ## Model
 The model is based on BERT. I used the transformers library to create a classification model using BBC articles annotated by myself.
 Currently, the dataset is quite small and this is why the sentiment analysis is not as accurate as I would like.
-In the future, this could be improved by completing some of the goals mentioned above.
+In the future, this could be improved by completing some of the goals mentioned below.
 
 For documentation purposes all iterations of my training scripts were saved.
 
