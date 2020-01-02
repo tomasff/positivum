@@ -38,9 +38,9 @@ You are welcome to use this project but I will not be providing support for it.
 
 ## Dataset Source
 The current dataset was annotated by myself, but is based on the following publication:
-```
+
 D. Greene and P. Cunningham. "Practical Solutions to the Problem of Diagonal Dominance in Kernel Document Clustering", Proc. ICML 2006. [PDF](http://mlg.ucd.ie/files/publications/greene06icml.pdf) [BibTex](http://mlg.ucd.ie/files/bib/greene06icml.bib).
-```
+
 
 ## License
 [MIT License](https://github.com/tomasff/positivum/blob/master/LICENSE)
