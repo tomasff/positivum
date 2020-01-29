@@ -61,7 +61,7 @@
 			<nav aria-label="Articles pages navigation">
 				<ul class="pagination justify-content-center">
 					<li class="page-item {{ 'disabled' if not articles.has_prev }}">
-						<a class="page-link" href="{{ url_for('page', num_page=articles.prev_num, cls=cls) if articles.has_prev }}">Previous</a>
+						<a class="page-link" href="{{ url_for('page', num_page=articles.prev_num, cls=cls) if articles.has_prev }}"><</a>
 					</li>
                                         {% if articles.pages <= 5 %}
                                             {{ numbered_pagination_items(1, articles.pages, articles.page) }}
@@ -95,7 +95,7 @@
                                             {% endif %}
                                         {% endif %}
 					<li class="page-item {{ 'disabled' if not articles.has_next }}">
-						<a class="page-link" href="{{ url_for('page', num_page=articles.next_num, cls=cls) if articles.has_next }}">Next</a>
+                                            <a class="page-link" href="{{ url_for('page', num_page=articles.next_num, cls=cls) if articles.has_next }}">></a>
 					</li>
 				</ul>
 			</nav>
