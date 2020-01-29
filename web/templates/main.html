@@ -19,11 +19,27 @@
 {% endmacro %}
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>Positivum | {{ title }}</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta charset="UTF-8">
+                <title>Positivum | {{ title }}</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.4.1/litera/bootstrap.min.css" />
-		<style>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta name="title" content="Positivum | Positive or neutral">
+                <meta name="description" content="A web application which categorizes news articles by sentiment">
+
+                <!-- Open Graph / Facebook -->
+                <meta property="og:type" content="website">
+                <meta property="og:url" content="{{ url_for('main', _external=True) }}">
+                <meta property="og:title" content="Positivum | {{ title }}">
+                <meta property="og:description" content="A web application which categorizes news articles by sentiment">
+                <meta property="og:image" content="{{ url_for('static', filename='images/positivum_preview.png', _external=True) }} ">
+
+                <!-- Twitter -->
+                <meta property="twitter:card" content="summary_large_image">
+                <meta property="twitter:url" content="{{ url_for('main', _external=True) }}">
+                <meta property="twitter:title" content="Positivum | {{ title }}">
+                <meta property="twitter:description" content="A web application which categorizes news articles by sentiment">
+                <meta property="twitter:image" content="{{ url_for('static', filename='images/positivum_preview.png', _external=True) }}">
+                <style>
 			.card {
 				margin-bottom: 1rem;
 			}
@@ -31,7 +47,7 @@
 			#title {
 				margin-top: 1rem;
 			}
-		</style>
+                </style>
 	</head>
 	<body>
 		<div class="container">
