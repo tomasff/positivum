@@ -25,7 +25,7 @@ db.init_app(app)
 @app.route('/')
 def main():
     articles = db.session.query(Article).filter(Article.classification == 1).order_by(desc(Article.pub_date)).paginate(1, per_page=app.config['ARTICLES_PER_PAGE'])
-    return render_template('main.html', articles=articles, title='Positive or neutral', cls=1)
+    return render_template('main.html', articles=articles, title='Home', cls=1)
 
 @app.route('/class/<int:cls>')
 @app.route('/class/<int:cls>/page/<int:num_page>')
