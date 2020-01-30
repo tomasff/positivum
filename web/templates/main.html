@@ -94,8 +94,9 @@
 					<div class="card-body">
 						<h6 class="card-title">{{ article.title }}</h6>
 						<h6 class="card-subtitle mb-2 text-muted">
-							<a href="{{ url_for('page', num_page=1, cls=article.classification) }}">
-								<span class="badge badge-pill badge-{{'success' if (article.classification == 1) else 'danger'}}">{{ 'Positive or Neutral 😊' if (article.classification == 1) else 'Negative 😫' }}</span>
+							<a class="badge badge-pill badge-{{'success' if (article.classification == 1) else 'danger'}}"
+                                                            href="{{ url_for('page', num_page=1, cls=article.classification) }}">
+								{{ 'Positive or Neutral 😊' if (article.classification == 1) else 'Negative 😫' }}
 							</a>
 						</h6>
 						<p class="card-text">{{ article.description }}</p>
@@ -127,7 +128,7 @@
 
                                                 {{ numbered_pagination_items(articles.page - 1, articles.next_num, articles.page) }}
 
-                                                {{ pagination_separator() }} 
+                                                {{ pagination_separator() }}
 
                                                 {{ numbered_pagination_item(articles.pages, False) }}
                                             {% endif %}
