@@ -53,7 +53,7 @@ def gen_str_date_series(lower, upper, step = 1):
     step = datetime.timedelta(days = step)
     current = lower
 
-    while current != upper:
+    while current != (upper + datetime.timedelta(days = 1)):
         yield str(current)
         current += step
 
@@ -65,24 +65,22 @@ def statistics():
     stats = dict()
 
     day_upper = datetime.date.today()
-    day_lower = day_upper - datetime.timedelta(days = 5)
+    day_lower = day_upper - datetime.timedelta(days = 4)
 
     stats['days'] = [*gen_str_date_series(day_lower, day_upper)]
-
-    print(stats['days'])
 
     stats['articles_total'] = db.session.query(Article).count()
     stats['positive_neutral_total'] = db.session.query(Article).filter(Article.classification == 1).count()
     stats['negative_total'] = db.session.query(Article).filter(Article.classification == 0).count()
 
     stats['positive_neutral_days_count'] = db.session.query(db.func.count(Article.pub_date)) \
-                                        .filter(and_(Article.classification == 1, Article.pub_date > day_lower)) \
+                                        .filter(and_(Article.classification == 1, Article.pub_date >= day_lower)) \
                                         .group_by(db.func.date(Article.pub_date)).all()
 
     stats['positive_neutral_days_count'] = unzip(stats['positive_neutral_days_count']) 
 
     stats['negative_days_count'] = db.session.query(db.func.count(Article.pub_date)) \
-                                        .filter(and_(Article.classification == 0, Article.pub_date > day_lower)) \
+                                        .filter(and_(Article.classification == 0, Article.pub_date >= day_lower)) \
                                         .group_by(db.func.date(Article.pub_date)).all()
 
     stats['negative_days_count'] = unzip(stats['negative_days_count'])
