@@ -26,12 +26,17 @@
                 <meta name="title" content="Positivum | Positive or neutral">
                 <meta name="description" content="A web application which categorizes news articles by sentiment">
 
+                <!-- Theme color  -->
+                <meta name="theme-color" content="#FFFFFF">
+
                 <!-- Open Graph / Facebook -->
                 <meta property="og:type" content="website">
                 <meta property="og:url" content="{{ url_for('main', _external=True) }}">
                 <meta property="og:title" content="Positivum | {{ title }}">
                 <meta property="og:description" content="A web application which categorizes news articles by sentiment">
                 <meta property="og:image" content="{{ url_for('static', filename='images/positivum_preview.png', _external=True) }} ">
+                <meta property="og:image:width" content="1200">
+                <meta property="og:image:height" content="630">
 
                 <!-- Twitter -->
                 <meta property="twitter:card" content="summary_large_image">
@@ -39,6 +44,8 @@
                 <meta property="twitter:title" content="Positivum | {{ title }}">
                 <meta property="twitter:description" content="A web application which categorizes news articles by sentiment">
                 <meta property="twitter:image" content="{{ url_for('static', filename='images/positivum_preview.png', _external=True) }}">
+                <meta property="twitter:image:width" content="1200">
+                <meta property="twitter:image:height" content="630">
                 <style>
 			.card {
 				margin-bottom: 1rem;
