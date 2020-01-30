@@ -1,0 +1,66 @@
+<html>
+	<head>
+                {% block head %}
+                <meta charset="UTF-8">
+                <title>{% block title %}Positivum | {{ title }}{% endblock %}</title>
+                <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta name="title" content="Positivum | Positive or neutral">
+                <meta name="description" content="A web application which categorizes news articles by sentiment">
+
+                <!-- Theme color  -->
+                <meta name="theme-color" content="#2d906c">
+
+                <!-- Open Graph / Facebook -->
+                <meta property="og:type" content="website">
+                <meta property="og:url" content="{{ url_for('main', _external=True) }}">
+                <meta property="og:title" content="Positivum | {{ title }}">
+                <meta property="og:description" content="A web application which categorizes news articles by sentiment">
+                <meta property="og:image" content="{{ url_for('static', filename='images/positivum_preview.png', _external=True) }}">
+                <meta property="og:image:width" content="1200">
+                <meta property="og:image:height" content="630">
+
+                <!-- Twitter -->
+                <meta property="twitter:card" content="summary_large_image">
+                <meta property="twitter:url" content="{{ url_for('main', _external=True) }}">
+                <meta property="twitter:title" content="Positivum | {{ title }}">
+                <meta property="twitter:description" content="A web application which categorizes news articles by sentiment">
+                <meta property="twitter:image" content="{{ url_for('static', filename='images/positivum_preview.png', _external=True) }}">
+                <meta property="twitter:image:width" content="1200">
+                <meta property="twitter:image:height" content="630">
+                <style>.card { margin-bottom: 1rem; } #title { margin-top: 2rem; margin-bottom: 2rem; } .nav-link { padding: 0.5rem 0.5rem; }</style>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.4.1/litera/bootstrap.min.css" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>      
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+                {% endblock %}
+	</head>
+	<body>
+		<div class="container">
+                        <img src="{{ url_for('static', filename='images/logo_positivum.svg') }}" id="title" class="img-fluid mx-auto d-block">
+                        <hr>
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ url_for('main') }}">Home</a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ url_for('about') }}">About</a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ url_for('statistics') }}">Statistics</a>
+                            </li>
+                            <li class="nav-item dropdown ml-auto">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Sentiment</a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{ url_for('page', num_page=1, cls=1) }}">Positive or neutral 😊</a>
+                                    <a class="dropdown-item" href="{{ url_for('page', num_page=1, cls=0) }}">Negative 😫</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <hr>
+                        {% block content %}{% endblock %}
+                        <hr>
+                        <p class="float-right text-muted">Made by <a href="https://github.com/tomasff">Tomás Fernandes</a></p>
+		</div>
+	</body>
+</html>

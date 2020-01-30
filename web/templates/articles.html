@@ -1,0 +1,81 @@
+{% macro pagination_item(content, url, active = False, disabled = False) %}
+<li class="page-item {{ 'active' if active }} {{ 'disabled' if disabled }}">
+    <a class="page-link" href="{{ url }}">{{ content }}</a>
+</li>
+{% endmacro %}
+
+{% macro numbered_pagination_item(number, active = True)  %}
+    {{ pagination_item(number, url_for('page', num_page=number, cls=cls), active, False) }}
+{% endmacro %}
+
+{% macro pagination_separator() %}
+    {{ pagination_item('...', '', False, True) }}
+{% endmacro %}
+
+{% macro numbered_pagination_items(lower, upper, current)  %}
+    {% for page_number in range(lower, upper + 1) %}
+        {{ numbered_pagination_item(page_number, current == page_number) }}
+    {% endfor %}
+{% endmacro %}
+
+{% extends 'base.html' %}
+{% block content  %}
+			<div id="articles">
+				{% for article in articles.items %}
+				<div class="card">
+					<div class="card-body">
+						<h6 class="card-title">{{ article.title }}</h6>
+						<h6 class="card-subtitle mb-2 text-muted">
+							<a class="badge badge-pill badge-{{'success' if (article.classification == 1) else 'danger'}}"
+                                                            href="{{ url_for('page', num_page=1, cls=article.classification) }}">
+								{{ 'Positive or Neutral 😊' if (article.classification == 1) else 'Negative 😫' }}
+							</a>
+						</h6>
+						<p class="card-text">{{ article.description }}</p>
+						<a href="{{ article.url }}" class="card-link">Source</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<nav aria-label="Articles pages navigation">
+				<ul class="pagination justify-content-center">
+					<li class="page-item {{ 'disabled' if not articles.has_prev }}">
+						<a class="page-link" href="{{ url_for('page', num_page=articles.prev_num, cls=cls) if articles.has_prev }}"><</a>
+					</li>
+                                        {% if articles.pages <= 5 %}
+                                            {{ numbered_pagination_items(1, articles.pages, articles.page) }}
+                                        {% else %}
+                                            {% if articles.page <= 5 %}
+                                                {{ numbered_pagination_items(1, 5, articles.page) }}
+
+                                                {{ pagination_separator() }}
+
+                                                {{ numbered_pagination_item(articles.pages, False) }}
+                                            {% endif %}
+
+                                            {% if articles.page > 5 and articles.page < articles.pages - 5 %}
+                                                {{ numbered_pagination_item(1, False) }}
+
+                                                {{ pagination_separator() }}
+
+                                                {{ numbered_pagination_items(articles.page - 1, articles.next_num, articles.page) }}
+
+                                                {{ pagination_separator() }}
+
+                                                {{ numbered_pagination_item(articles.pages, False) }}
+                                            {% endif %}
+
+                                            {% if articles.page >= articles.pages - 5 %} 
+                                                {{ numbered_pagination_item(1, False) }}
+
+                                                {{ pagination_separator() }}
+
+                                                {{ numbered_pagination_items(articles.pages - 5, articles.pages, articles.page) }}
+                                            {% endif %}
+                                        {% endif %}
+					<li class="page-item {{ 'disabled' if not articles.has_next }}">
+                                            <a class="page-link" href="{{ url_for('page', num_page=articles.next_num, cls=cls) if articles.has_next }}">></a>
+					</li>
+				</ul>
+			</nav>
+{% endblock %}

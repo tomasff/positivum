@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ super() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col">        
+        <canvas id="days_articles_chart" width="500" height="500"></canvas>
+    </div>
+    <div class="col">
+        <h5>Other Statistics</h5>
+        <ul>
+            <li>Number of positive & neutral articles: {{ stats.positive_neutral_total }}</li>
+            <li>Number of negative articles: {{ stats.negative_total }}</li>
+            <li>Number of articles (total): {{ stats.articles_total }}</li>
+            <li>Number of sources: {{ stats.sources }}</li>
+        <ul>
+    </div>
+</div>
+<script>
+var ctx = document.getElementById('days_articles_chart')
+
+var days_articles_chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ stats.days|safe }},
+        datasets: [{
+            label: 'Positive or Neutral',
+            backgroundColor: '#02B875',
+            borderColor: '#02B875',
+            data: {{ stats.positive_neutral_days_count }},
+            fill: false
+        }, {
+            label: 'Negative',
+            backgroundColor: '#d9534f',
+            borderColor: '#d9534f',
+            data: {{ stats.negative_days_count }},
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Number of articles and Day'
+        },
+        hover: {
+	    mode: 'nearest',
+            intersect: true
+	},
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Day'
+                },
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Count'
+                },
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+
+})
+</script>
+{% endblock %}
