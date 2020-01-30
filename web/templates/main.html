@@ -23,6 +23,9 @@
                 <title>Positivum | {{ title }}</title>
                 <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.4.1/litera/bootstrap.min.css" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>      
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <meta name="title" content="Positivum | Positive or neutral">
                 <meta name="description" content="A web application which categorizes news articles by sentiment">
@@ -49,23 +52,42 @@
                 <meta property="twitter:image:height" content="630">
                 <style>
 			.card {
-				margin-bottom: 1rem;
+			    margin-bottom: 1rem;
 			}
 
 			#title {
-				margin-top: 1rem;
+			    margin-top: 2rem;
+                            margin-bottom: 2rem;
 			}
+
+                        .nav-link {
+                            padding: 0.5rem 0.5rem;
+                        }
                 </style>
 	</head>
 	<body>
 		<div class="container">
-			<h2 id="title">Positivum: {{ title }}</h2>
-                        <p class="text-muted">A web application which classifies news articles by sentiment.</p>
-			<h6>
-				<a href="{{ url_for('page', num_page=1, cls=1) }}"><span class="badge badge-pill badge-success">Positive or Neutral 😊</span></a>
-				<a href="{{ url_for('page', num_page=1, cls=0) }}"><span class="badge badge-pill badge-danger">Negative 😫</span></a>
-			</h6>
-			<hr>
+                        <img src="{{ url_for('static', filename='images/logo_positivum.svg') }}" id="title" class="img-fluid mx-auto d-block">
+                        <hr>
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ url_for('main') }}">Home</a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">About</a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Statistics</a>
+                            </li>
+                            <li class="nav-item dropdown ml-auto">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Sentiment</a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{ url_for('page', num_page=1, cls=1) }}">Positive or neutral 😊</a>
+                                    <a class="dropdown-item" href="{{ url_for('page', num_page=1, cls=0) }}">Negative 😫</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <hr>
 			<div id="articles">
 				{% for article in articles.items %}
 				<div class="card">
