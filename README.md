@@ -28,8 +28,8 @@ The required dependencies for each component of Positivum are listed in the `req
 - [x] Create a reasonable model which is able to classify the title of news articles as positive/neutral and negative.
 - [x] Create a backend service which is able to query and store articles from different RSS feeds which are fetched from the database.
 - [x] Create a web application which displays the articles stored in the database.
-- [ ] Improve the web application appearance.
-- [ ] Show a shorter page navigation when the number of pages is big.
+- [x] Improve the web application appearance.
+- [x] Show a shorter page navigation when the number of pages is big.
 - [ ] Use feedback from users to train and improve the model.
 - [ ] Share articles feature.
 - [ ] Show confidence in each sentiment on the web application.
