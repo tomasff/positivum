@@ -30,7 +30,6 @@ The required dependencies for each component of Positivum are listed in the `req
 - [x] Create a web application which displays the articles stored in the database.
 - [ ] Improve the web application appearance.
 - [ ] Show a shorter page navigation when the number of pages is big.
-- [ ] Allow users to vote on the article's sentiment.
 - [ ] Use feedback from users to train and improve the model.
 - [ ] Share articles feature.
 - [ ] Show confidence in each sentiment on the web application.
