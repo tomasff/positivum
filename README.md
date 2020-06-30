@@ -5,6 +5,7 @@
 <hr>
 
 Positivum consits of a web application and a backend service which categorizes news articles by their sentiment.
+
 **NOTE:** As of 30/06/2020 the public demo is no longer available. While the demo was run, around 34000 articles were collected and classified.
        I will release the categorized articles under an open-source license at a later time.
 
