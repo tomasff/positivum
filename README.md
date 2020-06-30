@@ -4,7 +4,9 @@
 
 <hr>
 
-[Positivum](https://positivum.tomasfernandes.dev/) consits of a web application and a backend service which categorizes news articles by their sentiment.
+Positivum consits of a web application and a backend service which categorizes news articles by their sentiment.
+**NOTE:** As of 30/06/2020 the public demo is no longer available. While the demo was run, around 34000 articles were collected and classified.
+       I will release the categorized articles under an open-source license at a later time.
 
 ## How it works
 Every few minutes, a background service written in Python queries different RSS feeds stored in the database and classifies them using a model.
