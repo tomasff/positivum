@@ -42,6 +42,6 @@ tensorflow-gpu==2.0.3
 termcolor==1.1.0
 tqdm==4.41.1
 transformers==2.3.0
-urllib3==1.25.7
+urllib3==1.25.8
 Werkzeug==0.16.0
 wrapt==1.11.2
